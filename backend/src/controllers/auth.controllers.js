@@ -39,8 +39,6 @@ export const signup = async (req, res) => {
         fullName: newUser.fullName,
         email: newUser.email,
       });
-    } else {
-      res.status(400).json({ message: "Something went wrong" });
     }
   } catch (error) {
     console.log(error);

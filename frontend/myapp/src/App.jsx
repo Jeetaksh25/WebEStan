@@ -12,6 +12,9 @@ import HomePage from "./pages/HomePage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import ProfilePage from "./pages/Profile.jsx";
+import Tasks from "./pages/Tasks.jsx";
+import Test from "./pages/Test.jsx";
+import Connect from "./pages/Connect.jsx";
 
 function App() {
   const { authUser, isCheckingAuth, checkAuth } = useAuthStore();
@@ -65,6 +68,9 @@ function App() {
             path="/profile"
             element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
           />
+          <Route path="/tasks" element={authUser ? <Tasks /> : <Navigate to="/login" />}/>
+          <Route path={"/test"} element={<Test/>}/>
+          <Route path="/connect" element={authUser ? <Connect /> : <Navigate to="/login" />}/>
         </Routes>
 
       </Box>
