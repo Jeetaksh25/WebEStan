@@ -4,9 +4,9 @@ import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import { connectDB } from "../config/config.js"; 
 import mongoose from "mongoose";
-import authRoutes from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import authRoutes from "./routes/auth.route.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
