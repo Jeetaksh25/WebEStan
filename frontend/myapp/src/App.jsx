@@ -3,8 +3,8 @@ import { axiosInstance } from "./lib/axios.js";
 import { useAuthStore } from "./store/useAuthStore.js";
 import { Toaster } from "react-hot-toast";
 import { use } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { Box, Text, VStack, Spinner, } from "@chakra-ui/react";
+import { Routes, Route, Navigate, } from "react-router-dom";
+import { Box, Text, VStack, Spinner, Container } from "@chakra-ui/react";
 import { useColorModeValue } from "./components/ui/color-mode.jsx";
 
 import NavBar from "./comps/NavBar.jsx";
@@ -48,7 +48,7 @@ function App() {
 
   return (
     <>
-      <Box>
+      <Container w={"100%"} minH={"100vh"} minW={"100%"} bg={useColorModeValue("rgb(254, 240, 216)", "gray.900")}>
         <NavBar />
 
         <Routes>
@@ -73,7 +73,7 @@ function App() {
           <Route path="/connect" element={authUser ? <Connect /> : <Navigate to="/login" />}/>
         </Routes>
 
-      </Box>
+      </Container>
 
       <Toaster/>
     </>

@@ -325,17 +325,19 @@ const Test = () => {
       <Box
         justifyContent={"center"}
         alignItems={"center"}
-        w={{ base: "100%", sm: "90%", md: "80%", lg: "60%", xl: "50%" }}
+        w={{ base: "100%", sm: "100%", md: "90%", lg: "70%", xl: "60%" }}
         h={"max-content"}
         bg={useColorModeValue("gray.200", "gray.800")}
         mx={"auto"}
-        p={5}
+        p={10}
         rounded={"md"}
         marginTop={10}
+        shadow={useColorModeValue("0px 4px 6px gray", "sm")}
+
       >
-        <VStack gap={4} alignItems={"left"} textAlign={"left"}>
-          <Text>Question {currentQuestionIndex + 1}:</Text>
-          <Heading>
+        <VStack gap={5} alignItems={"left"} textAlign={"left"}>
+          <Text fontSize={"xl"}>Question {currentQuestionIndex + 1}:</Text>
+          <Heading fontSize={{ base: "xl", sm: "xl", md: "2xl", lg: "2xl" }} p={3}> 
             {showResult ? resultMessage : showQuestion.question}
           </Heading>
 
@@ -353,6 +355,7 @@ const Test = () => {
               maxW={"60%"}
               w={"60%"}
               minW={"max-content"}
+              fontSize={"md"}
             >
               {option.text}
 
@@ -371,6 +374,10 @@ const Test = () => {
             </Button>
           )}
         </VStack>
+
+        {showResult && (
+          <Button onClick={() => navigate("/tasks")}>Go to Daily Tasks</Button>
+        )}
       </Box>
     </Container>
   );
