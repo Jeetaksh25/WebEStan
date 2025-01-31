@@ -76,8 +76,8 @@ function App() {
           />
           <Route
             path="/chatbot"
-            element={
-              <Flex
+            element={authUser ?
+              (<Flex
                 direction="column"
                 justify="center"
                 align="center"
@@ -91,7 +91,8 @@ function App() {
                   style={{ border: "none" }}
                   title="Chatbot"
                 ></iframe>
-              </Flex>
+              </Flex>)
+              : <Navigate to="/login" />
             }
           />
         </Routes>

@@ -20,7 +20,20 @@ export const completeTask = async (req,res) => {
         const userId = req.user._id;
         const taskId = req.params.taskId;
 
-        await User.findByIdAndUpdate(userId,{$push:{completedTasks:taskId}});
+        if (!taskId) {
+            return res.status(400).json({ message: "Task ID is required" });
+        }
+
+        const task = await Task.findById(taskId);
+
+        if (!task) {
+            return res.status(404).json({ message: "Task not found" });
+        }
+
+        const user_update = await User.findByIdAndUpdate(userId,{$push:{completedTasks:taskId}});
+
+        user_update.completedTasks.push(taskId);
+        await user_update.save();
 
         res.status(200).json({ message: "Task completed successfully" });
     } 

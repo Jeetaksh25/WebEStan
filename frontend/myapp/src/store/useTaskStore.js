@@ -11,6 +11,8 @@ export const useTaskStore = create((set)=>({
                 headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
 
             });
+
+            console.log(res.data);
             set({tasks:res.data});
         }
         catch (error) {
@@ -19,6 +21,11 @@ export const useTaskStore = create((set)=>({
         }
     },
     completeTask: async (taskId) => {
+        console.log(taskId);
+        if(!taskId){
+            toast.error("Task ID is required");
+            return;
+        }
         try {
             await axiosInstance.post(`/tasks/${taskId}/complete`,null,{
                 headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
@@ -28,6 +35,7 @@ export const useTaskStore = create((set)=>({
                 tasks: state.tasks.filter((task) => task._id !== taskId),
             }));
 
+            toast.success("Task completed successfully");
         } catch (error) {
             console.log(error);
             toast.error("Failed to complete task");

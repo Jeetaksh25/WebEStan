@@ -193,7 +193,7 @@ const HomePage = () => {
               maxW={"80%"}
               mx={"auto"}
             >
-              This is a simple quiz like test that will help you undeerstand
+              This is a simple quiz like test that will help you understand
               your mental health.
             </Text>
 

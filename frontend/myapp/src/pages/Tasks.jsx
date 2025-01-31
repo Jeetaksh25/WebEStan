@@ -40,15 +40,42 @@ const TaskPage = () => {
           flexDir={"column"}
           gap={10}
         >
-          <Heading fontSize={"4xl"}>Task: {tasks.title}</Heading>
-          <Link to={tasks.task}><Button>Do Task</Button></Link>
-          <Button colorScheme="blue" onClick={() => completeTask(tasks._id)}>
-            Task Completed
-          </Button>
+          <Heading fontSize={"4xl"}>Tasks</Heading>
+          {tasks.length > 0 ? (
+            tasks.map((task) => (
+              <Box
+                key={task._id}
+                p={5}
+                borderRadius="md"
+                shadow="md"
+                flexDir={"column"}
+                display={"flex"}
+                gap={3}
+                alignItems={"center"}
+              >
+                <Heading fontSize="xl">{task.title}</Heading>
+                <Link to={task.task}>
+                  <Button colorScheme="teal" mt={3}>
+                    Do Task
+                  </Button>
+                </Link>
+                <Button
+                  colorScheme="blue"
+                  mt={3}
+                  onClick={() => completeTask(task._id)}
+                >
+                  Task Completed
+                </Button>
+              </Box>
+            ))
+          ) : (
+            <Heading fontSize={"4xl"}>No tasks found</Heading>
+          )}
         </Flex>
       </Box>
     </Container>
   );
 };
+
 
 export default TaskPage;
