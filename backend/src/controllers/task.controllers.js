@@ -1,53 +1,53 @@
 import Task from "../models/task.model.js";
+import User from "../models/user.model.js";
 
-export const getTasks = async (req, res) => {
-    const {userId} = req.user;
+export const getTasks = async (req,res) => {
+    try {
+        const userId = req.user._id;
+        const user = await User.findById(userId).populate("completedTasks");
 
-    const tasks = await Task.find({userId,taskStatus: false}).limit(3);
+        const tasks = await Task.find({_id:{$nin:user.completedTasks}}).limit(3);
 
-    if(tasks.length < 3){
-        const allTasks = await Task.find();
-        const existingTasks = tasks.map((task) => task.task);
-
-        const newTask = allTasks.map(t=>t.task).filter(task=>!existingTasks.includes(task)).slice(0.3 - tasks.length).map(task => ({userId,task,taskStatus: false}));
-
-        if (newTask.length > 0) {
-            const savedTasks = await Task.insertMany(newTask);
-            tasks = [...tasks, ...savedTasks];
-        }
+        res.status(200).json(tasks);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal server error" });
     }
-
-    return res.status(200).json(tasks);
-} 
-
-export const updateTask = async (req, res) => {
-    const {taskId} = req.params;
-    const {userId} = req.user;
-
-    const updatedTask = await Task.findByIdAndUpdate(taskId,{taskStatus:true, updatedAt: Date.now()},{new: true});
-
-    const remainingTasks = await Task.find({userId,taskStatus: false});
-
-    if (remainingTasks.length < 3){
-        const allTasks = await Task.find();
-        const existingTasks = await Task.find({userId});
-        const existingTaskNames = existingTasks.map((task) => task.task);
-
-        const newTaskName = allTasks.map(t=>t.task).find(task => !existingTaskNames.includes(task));
-
-        if (newTaskName) {
-            const newTask = new Task({userId,task: newTaskName,taskStatus: false});
-            await newTask.save();
-        }
-    }
-
-    return res.status(200).json(updatedTask);
 }
 
-export const history = async (req, res) => {
-    const {userId} = req.user;
+export const completeTask = async (req,res) => {
+    try {
+        const userId = req.user._id;
+        const taskId = req.params.taskId;
 
-    const history = await Task.find({userId,taskStatus: true}).sort({updatedAt: -1});
+        await User.findByIdAndUpdate(userId,{$push:{completedTasks:taskId}});
 
-    return res.status(200).json(history);
+        res.status(200).json({ message: "Task completed successfully" });
+    } 
+    catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+export const addTask = async (req,res) => {
+    try {
+        const {title,task} = req.body;
+        const userId = req.user._id;
+
+        if (!title || !task) {
+            return res.status(400).json({ message: "All fields are required" });
+        }
+
+        const newTask = new Task({title,task,userId});
+        await newTask.save();
+
+        res.status(201).json({ message: "Task added successfully", task: newTask });
+
+    }
+
+    catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal server error" });
+    }
 }

@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import { axiosInstance } from "./lib/axios.js";
 import { useAuthStore } from "./store/useAuthStore.js";
 import { Toaster } from "react-hot-toast";
-import { use } from "react";
-import { Routes, Route, Navigate, } from "react-router-dom";
-import { Box, Text, VStack, Spinner, Container } from "@chakra-ui/react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { Box, Text, VStack, Spinner, Container, Flex } from "@chakra-ui/react";
 import { useColorModeValue } from "./components/ui/color-mode.jsx";
 
 import NavBar from "./comps/NavBar.jsx";
@@ -15,6 +14,7 @@ import ProfilePage from "./pages/Profile.jsx";
 import Tasks from "./pages/Tasks.jsx";
 import Test from "./pages/Test.jsx";
 import Connect from "./pages/Connect.jsx";
+import Footer from "./comps/Footer.jsx";
 
 function App() {
   const { authUser, isCheckingAuth, checkAuth } = useAuthStore();
@@ -52,10 +52,7 @@ function App() {
         <NavBar />
 
         <Routes>
-          <Route
-            path="/"
-            element={<HomePage />}
-          />
+          <Route path="/" element={<HomePage />} />
           <Route
             path="/signup"
             element={!authUser ? <SignUpPage /> : <Navigate to="/" />}
@@ -68,14 +65,40 @@ function App() {
             path="/profile"
             element={authUser ? <ProfilePage /> : <Navigate to="/login" />}
           />
-          <Route path="/tasks" element={authUser ? <Tasks /> : <Navigate to="/login" />}/>
-          <Route path={"/test"} element={<Test/>}/>
-          <Route path="/connect" element={authUser ? <Connect /> : <Navigate to="/login" />}/>
+          <Route
+            path="/tasks"
+            element={authUser ? <Tasks /> : <Navigate to="/login" />}
+          />
+          <Route path="/test" element={<Test />} />
+          <Route
+            path="/connect"
+            element={authUser ? <Connect /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/chatbot"
+            element={
+              <Flex
+                direction="column"
+                justify="center"
+                align="center"
+                height="100vh"
+                px={4}
+              >
+                <iframe
+                  src="chatbot.htm"
+                  width="80%" 
+                  height="80%" 
+                  style={{ border: "none" }}
+                  title="Chatbot"
+                ></iframe>
+              </Flex>
+            }
+          />
         </Routes>
-
       </Container>
 
-      <Toaster/>
+      <Toaster />
+      <Footer />
     </>
   );
 }

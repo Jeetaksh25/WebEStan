@@ -150,8 +150,8 @@ const SignUpPage = () => {
           </VStack>
           <Button onClick={handleSubmit} mt={10} w={"10pc"} h={"auto"} fontSize={"xl"} p={4} rounded={"full"}>Sign Up</Button>
         </Box>
-        <Text>
-          Already have an account?{" "}
+        <Text color={useColorModeValue("black", "black")}>
+          Already have an account?
           <Link to="/login" color={"blue.600"}>
             Login
           </Link>

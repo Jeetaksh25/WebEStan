@@ -32,11 +32,11 @@ const Profile = () => {
           alignItems={"center"}
           w={{ base: "100%", sm: "90%", md: "80%", lg: "60%", xl: "50%" }}
           h={"max-content"}
-          bg={useColorModeValue("gray.200", "gray.800")}
+          bg={useColorModeValue("rgb(254, 244, 226)", "gray.800")}
           mx={"auto"}
           p={5}
           rounded={"md"}
-          shadow={useColorModeValue("0px 4px 6px gray", "sm")}
+          shadow={useColorModeValue("md", "md")}
         >
           <VStack gap={4} alignItems={"center"}>
             <Text>Name: {authUser.fullName}</Text>

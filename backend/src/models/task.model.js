@@ -1,25 +1,20 @@
 import mongoose from "mongoose";
 
 const taskSchema = new mongoose.Schema({
-  userId: { 
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User", required: true },
+    ref: "User",
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+
   task: {
     type: String,
-    required: true },
-
-  taskStatus: { 
-    type: Boolean, 
-    default: false },
-
-  dateAssigned: { 
-    type: Date, 
-    default: 
-    Date.now },
-    
-  updatedAt: { 
-    type: Date, 
-    default: null },
+    required: true,
+  },
 });
 
 const Task = mongoose.model("Task", taskSchema);

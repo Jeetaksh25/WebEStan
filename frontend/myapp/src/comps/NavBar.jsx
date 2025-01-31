@@ -47,20 +47,28 @@ const NavBar = () => {
           </Heading>
         </Link>
         <Link to="/tasks">
-          <Button bg={useColorModeValue("gray.300", "gray.600")} color={useColorModeValue("black", "white")}>
+          <Button bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")}>
             Daily Tasks
           </Button>
         </Link>
         <Link to="/test">
-          <Button bg={useColorModeValue("gray.300", "gray.600")} color={useColorModeValue("black", "white")}>
+          <Button bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")}>
             Take Test
           </Button>
         </Link>
         <Link to="/connect">
-          <Button bg={useColorModeValue("gray.300", "gray.600")} color={useColorModeValue("black", "white")}>
+          <Button bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")}>
             Connect
           </Button>
         </Link>
+
+        <Link to="/chatbot">
+          <Button bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")}>
+            Chat Bot
+          </Button>
+        </Link>
+
+
       </Flex>
     </>
   );
@@ -70,12 +78,14 @@ const NavBar = () => {
       w="98%"
       px={5}
       py={3}
-      bg={useColorModeValue("gray.200", "gray.800")}
+      bg={useColorModeValue("rgb(247, 230, 201)", "gray.800")}
       color={useColorModeValue("black", "white")}
       borderRadius="md"
       mx={"auto"}
-      my={1}
+      my={0}
       position={"sticky"}
+      zIndex={1000}
+      shadow={useColorModeValue("md", "md")}
     >
       {isMobile ? (
         <DrawerRoot key={"start"} placement="start">
@@ -91,12 +101,12 @@ const NavBar = () => {
             {!authUser && (
               <>
                 <Link to="/login">
-                  <Button bg={useColorModeValue("gray.300", "gray.600")} color={useColorModeValue("black", "white")}>
+                  <Button bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")}>
                     Login
                   </Button>
                 </Link>
                 <Link to="/signup">
-                  <Button bg={useColorModeValue("gray.300", "gray.600")} color={useColorModeValue("black", "white")}>
+                  <Button bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")}>
                     Register
                   </Button>
                 </Link>
@@ -119,11 +129,11 @@ const NavBar = () => {
                 {authUser ? (
                   <VStack gap={2}>
                     <Link to="/profile">
-                      <Button bg={useColorModeValue("gray.300", "gray.600")} color={useColorModeValue("black", "white")}>
+                      <Button bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")}>
                         Profile
                       </Button>
                     </Link>
-                    <Button onClick={handleLogout} bg={useColorModeValue("gray.300", "gray.600")} color={useColorModeValue("black", "white")}>
+                    <Button onClick={handleLogout} bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")}>
                       Logout
                     </Button>
                   </VStack>
@@ -142,12 +152,12 @@ const NavBar = () => {
             {!authUser ? (
               <>
                 <Link to="/login">
-                  <Button bg={useColorModeValue("gray.300", "gray.600")} color={useColorModeValue("black", "white")}>
+                  <Button bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")}>
                     Login
                   </Button>
                 </Link>
                 <Link to="/signup">
-                  <Button bg={useColorModeValue("gray.300", "gray.600")} color={useColorModeValue("black", "white")}>
+                  <Button bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")}>
                     Register
                   </Button>
                 </Link>
@@ -155,11 +165,11 @@ const NavBar = () => {
             ) : (
               <>
                 <Link to="/profile">
-                  <Button bg={useColorModeValue("gray.300", "gray.600")} color={useColorModeValue("black", "white")}>
+                  <Button bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")}>
                     Profile
                   </Button>
                 </Link>
-                <Button onClick={handleLogout} bg={useColorModeValue("gray.300", "gray.600")} color={useColorModeValue("black", "white")}>
+                <Button onClick={handleLogout} bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")}>
                   Logout
                 </Button>
               </>

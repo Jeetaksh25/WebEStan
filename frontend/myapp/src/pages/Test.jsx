@@ -12,7 +12,6 @@ import {
 } from "@chakra-ui/react";
 import { useColorModeValue, useColorMode } from "../components/ui/color-mode";
 
-
 const Test = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -270,8 +269,10 @@ const Test = () => {
   const showQuestion = questions[currentQuestionIndex];
 
   const selectOption = (score, index) => {
-    setTotalScore((prevScore) => prevScore + score);
+    const newScore = totalScore + score;
+    setTotalScore(newScore);
     setSelectedOptionIndex(index);
+
     if (currentQuestionIndex < questions.length - 1) {
       setTimeout(() => {
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -279,7 +280,7 @@ const Test = () => {
       }, 500);
     } else {
       setShowResult(true);
-      setResultMessage(getResultMessage());
+      setResultMessage(getResultMessage(newScore));
     }
   };
 
@@ -327,17 +328,19 @@ const Test = () => {
         alignItems={"center"}
         w={{ base: "100%", sm: "100%", md: "90%", lg: "70%", xl: "60%" }}
         h={"max-content"}
-        bg={useColorModeValue("gray.200", "gray.800")}
+        bg={useColorModeValue("rgb(254, 244, 226)", "gray.800")}
         mx={"auto"}
         p={10}
         rounded={"md"}
         marginTop={10}
-        shadow={useColorModeValue("0px 4px 6px gray", "sm")}
-
+        shadow={useColorModeValue("md", "md")}
       >
         <VStack gap={5} alignItems={"left"} textAlign={"left"}>
           <Text fontSize={"xl"}>Question {currentQuestionIndex + 1}:</Text>
-          <Heading fontSize={{ base: "xl", sm: "xl", md: "2xl", lg: "2xl" }} p={3}> 
+          <Heading
+            fontSize={{ base: "xl", sm: "xl", md: "2xl", lg: "2xl" }}
+            p={3}
+          >
             {showResult ? resultMessage : showQuestion.question}
           </Heading>
 
@@ -348,7 +351,8 @@ const Test = () => {
               bg={
                 selectedOptionIndex === index
                   ? useColorModeValue("blue.500", "blue.200")
-                : useColorModeValue("gray.300", "gray.600")}
+                  : useColorModeValue("rgb(255, 251, 244)", "gray.600")
+              }
               color={useColorModeValue("black", "white")}
               textAlign={"left"}
               alignItems={"left"}
@@ -358,7 +362,6 @@ const Test = () => {
               fontSize={"md"}
             >
               {option.text}
-
             </Button>
           ))}
 
@@ -369,15 +372,22 @@ const Test = () => {
                 setShowResult(false);
                 setSelectedOptionIndex(null);
               }}
+              w={"max-content"}
+              alignItems={"left"}
             >
               Take another test
             </Button>
           )}
+          {showResult && (
+            <Button
+              onClick={() => navigate("/tasks")}
+              m={5}
+              alignItems={"left"}
+            >
+              Go to Daily Tasks
+            </Button>
+          )}
         </VStack>
-
-        {showResult && (
-          <Button onClick={() => navigate("/tasks")}>Go to Daily Tasks</Button>
-        )}
       </Box>
     </Container>
   );

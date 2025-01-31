@@ -16,6 +16,10 @@ const userSchema = new mongoose.Schema(
       required: true,
       minlength: 6,
     },
+    completedTasks: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Task",
+    }],
   },
   {
     timestamps: true,
