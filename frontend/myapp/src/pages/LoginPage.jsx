@@ -53,8 +53,9 @@ const LoginPage = () => {
       alignItems={"center"}
       justifyContent={"center"}
       alignContent={"center"}
+      mt={-10}
     >
-      <VStack gap={1}>
+      <VStack gap={10}>
         <Heading fontSize={"4xl"}>Login</Heading>
       <Box
         justifyContent={"center"}
@@ -65,7 +66,7 @@ const LoginPage = () => {
         mx={"auto"}
         p={5}
         rounded={"md"}
-        marginTop={10}
+
       >
         <VStack gap={4}>
           <Input

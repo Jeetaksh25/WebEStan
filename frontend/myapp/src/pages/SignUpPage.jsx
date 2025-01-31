@@ -79,6 +79,7 @@ const SignUpPage = () => {
       alignItems={"center"}
       justifyContent={"center"}
       alignContent={"center"}
+      mt={-10}
     >
       <VStack gap={1}>
         <Heading textAlign={"center"} fontSize={"4xl"}>Register</Heading>

@@ -1,32 +1,14 @@
-import React, { useEffect } from "react";
-import {useTaskStore} from "../store/useTaskStore.js";
+import { Container } from '@chakra-ui/react'
+import React from 'react'
 
 const Tasks = () => {
-    const { tasks, fetchTasks, completeTask, allCompleted } = useTaskStore();
+  return (
+    <Container>
 
-    useEffect(() => {
-        fetchTasks();
-    }, []);
 
-    return (
-        <div>
-            <h2>Daily Tasks</h2>
-            {allCompleted ? (
-                <p>🎉 All tasks for today are completed! Come back tomorrow for new tasks.</p>
-            ) : (
-                <ul>
-                    {tasks.map(task => (
-                        <li key={task._id}>
-                            <span style={{ textDecoration: task.taskStatus ? "line-through" : "none" }}>
-                                {task.task}
-                            </span>
-                            {!task.taskStatus && <button onClick={() => completeTask(task._id)}>Complete</button>}
-                        </li>
-                    ))}
-                </ul>
-            )}
-        </div>
-    );
-};
+        
+    </Container>
+  )
+}
 
-export default Tasks;
+export default Tasks

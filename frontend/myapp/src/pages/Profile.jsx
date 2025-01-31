@@ -22,9 +22,10 @@ const Profile = () => {
       alignItems={"center"}
       justifyContent={"center"}
       alignContent={"center"}
+      mt={-10}
     >
-      <VStack>
-        <Heading textAlign={"center"} fontSize={"4xl"}>Profile</Heading>
+      <VStack gap={10}>
+        <Heading textAlign={"center"} fontSize={"4xl"} >Profile</Heading>
         <Box
           alignItems={"center"}
           w={{ base: "100%", sm: "90%", md: "80%", lg: "60%", xl: "50%" }}
@@ -33,7 +34,6 @@ const Profile = () => {
           mx={"auto"}
           p={5}
           rounded={"md"}
-          marginTop={10}
         >
           <VStack gap={4} alignItems={"center"}>
             <Text>Name: {authUser.fullName}</Text>
