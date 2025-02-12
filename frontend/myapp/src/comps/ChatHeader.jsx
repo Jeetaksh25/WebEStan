@@ -19,11 +19,10 @@ const ChatHeader = () => {
       my={1}
       mb={4}
       border={"1px solid black"}
-      p={2}
       rounded={"md"}
     >
       <HStack justifyContent={"space-between"} px={5}>
-        <Heading textAlign={"center"} fontSize={"2xl"}>
+        <Heading textAlign={"center"} fontSize={"2xl"} p={2}>
           {selectedUser.fullName}
         </Heading>
         <Button fontSize={"30px"} onClick={() => setSelectedUser(null)} bg={"transparent"} p={0} m={0}>
