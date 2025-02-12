@@ -19,6 +19,8 @@ const Footer = () => {
       mt={8}
       borderTopWidth={1}
       borderColor={useColorModeValue("gray.300", "gray.700")}
+      position={"relative"}
+      bottom={0}
     >
       <HStack justifyContent="center" gap={10}>
         <Link to="/Test">Test</Link>

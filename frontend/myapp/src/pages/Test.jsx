@@ -335,8 +335,8 @@ const Test = () => {
         marginTop={10}
         shadow={useColorModeValue("md", "md")}
       >
-        <VStack gap={5} alignItems={"left"} textAlign={"left"}>
-          <Text fontSize={"xl"}>Question {currentQuestionIndex + 1}:</Text>
+        <VStack gap={5} alignItems={"left"}>
+          <Text fontSize={"xl"} >Question: {currentQuestionIndex + 1}/20</Text>
           <Heading
             fontSize={{ base: "xl", sm: "xl", md: "2xl", lg: "2xl" }}
             p={3}
@@ -374,6 +374,8 @@ const Test = () => {
               }}
               w={"max-content"}
               alignItems={"left"}
+              bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")}
+              color={useColorModeValue("black", "white")}
             >
               Take another test
             </Button>
@@ -383,6 +385,8 @@ const Test = () => {
               onClick={() => navigate("/tasks")}
               m={5}
               alignItems={"left"}
+              bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")}
+              color={useColorModeValue("black", "white")}
             >
               Go to Daily Tasks
             </Button>

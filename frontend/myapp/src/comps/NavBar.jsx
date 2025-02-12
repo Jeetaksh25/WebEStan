@@ -68,6 +68,11 @@ const NavBar = () => {
           </Button>
         </Link>
 
+        <Link to="/freechat">
+          <Button bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")}>
+            Free Chat
+          </Button>
+        </Link>
 
       </Flex>
     </>

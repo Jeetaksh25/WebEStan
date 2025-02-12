@@ -20,7 +20,7 @@ const TaskPage = () => {
       alignItems={"center"}
       justifyContent={"center"}
       alignContent={"center"}
-      mt={-10}
+      mt={10}
       p={0}
       zIndex={10}
     >

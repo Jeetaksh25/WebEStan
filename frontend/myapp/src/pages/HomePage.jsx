@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect} from "react";
 import {
   Container,
   Box,
@@ -15,9 +15,10 @@ import { useColorModeValue } from "../components/ui/color-mode";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
+
   const handleScroll = () => {
     window.scrollTo({
-      top: 600,
+      top: 900,
       behavior: "smooth",
     });
   };
@@ -177,6 +178,7 @@ const HomePage = () => {
           alignItems={"center"}
           justifyContent={"center"}
           alignContent={"center"}
+          className="Test"
         >
           <VStack gap={5}>
             <Heading

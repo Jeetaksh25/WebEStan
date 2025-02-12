@@ -35,7 +35,7 @@ const Connect = () => {
       toast.error(`You can join the meeting after ${date} at ${time}`);
     } else {
       toast.success("Joining Meeting");
-      window.location.href = "https://meet.google.com/sws-hdig-rtg";
+      window.location.href = "https://meet.google.com/zxu-todg-sfb";
     }
   };
 

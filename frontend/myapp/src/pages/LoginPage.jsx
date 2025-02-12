@@ -133,8 +133,8 @@ const LoginPage = () => {
               </Button>
             </VStack>
 
-            <Text mt={4} fontSize={"lg"}>
-              Don't have an account?{" "}
+            <Text mt={4} fontSize={"lg"} color={"black"}>
+              Don't have an account?
               <Link to="/signup" color={"blue.600"}>
                 Sign Up
               </Link>
