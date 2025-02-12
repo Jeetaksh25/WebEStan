@@ -2,9 +2,9 @@ import React from "react";
 import { Text, VStack, Spinner } from "@chakra-ui/react";
 import { useColorModeValue } from "../components/ui/color-mode";
 
-const Loader = () => {
+const Loader = (props) => {
   return (
-    <VStack gap={2} justifyContent={"center"} minH={"100vh"}>
+    <VStack gap={2} justifyContent={"center"} h={props.h} boxSizing={"border-box"} alignContent={"center"} alignItems={"center"} {...props}>
       <Spinner
         size="xl"
         thickness="10px"

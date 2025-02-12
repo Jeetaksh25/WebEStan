@@ -5,7 +5,9 @@ import {toast} from "react-hot-toast";
 
 export const useTaskStore = create((set)=>({
     tasks:[],
+    isFetchingTasks: false,
     fetchTasks: async () => {
+        set({isFetchingTasks: true});
         try {
             const res = await axiosInstance.get("/tasks",{
                 headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
@@ -18,6 +20,9 @@ export const useTaskStore = create((set)=>({
         catch (error) {
             console.log(error);
             toast.error("Failed to fetch tasks");
+        }
+        finally {
+            set({isFetchingTasks: false});
         }
     },
     completeTask: async (taskId) => {

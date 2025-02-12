@@ -16,6 +16,7 @@ import { PasswordInput } from "@/components/ui/password-input";
 import { useAuthStore } from "../store/useAuthStore.js";
 import { Link } from "react-router-dom";
 import { toast } from "react-hot-toast";
+import Loader from "../comps/Loader.jsx";
 
 const LoginPage = () => {
   const { login, isLoggingIn, authUser } = useAuthStore();
@@ -25,22 +26,7 @@ const LoginPage = () => {
   useEffect(() => {
     if (isLoggingIn && !authUser) {
       return (
-        <VStack gap={2} justifyContent={"center"} minH={"100vh"}>
-          <Spinner
-            size="xl"
-            thickness="10px"
-            speed="0.65s"
-            emptyColor="orange"
-            color="blue.500"
-            borderWidth={"4px"}
-          />
-          <Text
-            fontSize={"2xl"}
-            color={useColorModeValue("gray.600", "gray.200")}
-          >
-            Loading...
-          </Text>
-        </VStack>
+        <Loader minH={"100vh"} h={"100%"}/>
       );
     }
   }, []);

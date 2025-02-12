@@ -5,13 +5,18 @@ import { useNavigate } from "react-router-dom";
 import { Heading, Box, Button, Flex, Container } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useColorModeValue } from "../components/ui/color-mode.jsx";
+import Loader from "../comps/Loader.jsx";
 
 const TaskPage = () => {
-  const { tasks, fetchTasks, completeTask } = useTaskStore();
+  const { tasks, fetchTasks, completeTask,isFetchingTasks } = useTaskStore();
 
   useEffect(() => {
     fetchTasks();
   }, [fetchTasks]);
+
+  if(!isFetchingTasks){
+    <Loader minH={"100vh"} h={"100%"}/>
+  }
 
   return (
     <Container

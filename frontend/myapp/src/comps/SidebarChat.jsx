@@ -16,15 +16,11 @@ const Users = () => {
   const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } =
     useChatStore();
 
-  const {onlineUsers} = useAuthStore();
+  const { onlineUsers } = useAuthStore();
 
   useEffect(() => {
     getUsers();
   }, []);
-
-  if (isUsersLoading) {
-    return <Loader />;
-  }
 
   return (
     <Container
@@ -50,42 +46,47 @@ const Users = () => {
             Available Counselors
           </Heading>
         </Box>
-
-        <Box
-          w={"100%"}
-          minH={"full"}
-          h={"100%"}
-          rounded={"lg"}
-          px={10}
-          py={5}
-          bg={useColorModeValue("rgb(253, 238, 211)", "gray.700")}
-          overflow={"auto"}
-        >
-          {Array.isArray(users) && users.length > 0 ? (
-            users.map((user) => (
-              <Button
-                key={user._id}
-                onClick={() => setSelectedUser(user)}
-                w={"100%"}
-                p={5}
-                alignContent={"center"}
-                justifyContent={"left"}
-                textAlign={"left"}
-                _hover={{ bg: "gray.200" }}
-                color={useColorModeValue("black", "white")}
-                bg={selectedUser?._id === user._id ? "gray.300"  : "transparent"}
-                my={2}
-                bgColor={useColorModeValue("rgb(254, 244, 226)", "gray.800")}
-              >
-                {user.fullName}
-              </Button>
-            ))
-          ) : (
-            <Text textAlign="center" p={4}>
-              No counselors available
-            </Text>
-          )}
-        </Box>
+        {!isUsersLoading ? (
+          <Box
+            w={"100%"}
+            minH={"70vh"}
+            h={"70vh"}
+            rounded={"lg"}
+            px={10}
+            py={5}
+            bg={useColorModeValue("rgb(253, 238, 211)", "gray.700")}
+            overflow={"auto"}
+          >
+            {Array.isArray(users) && users.length > 0 ? (
+              users.map((user) => (
+                <Button
+                  key={user._id}
+                  onClick={() => setSelectedUser(user)}
+                  w={"100%"}
+                  p={5}
+                  alignContent={"center"}
+                  justifyContent={"left"}
+                  textAlign={"left"}
+                  _hover={{ bg: "gray.200" }}
+                  color={useColorModeValue("black", "white")}
+                  bg={
+                    selectedUser?._id === user._id ? "gray.300" : "transparent"
+                  }
+                  my={2}
+                  bgColor={useColorModeValue("rgb(254, 244, 226)", "gray.800")}
+                >
+                  {user.fullName}
+                </Button>
+              ))
+            ) : (
+              <Text textAlign="center" p={4}>
+                No counselors available
+              </Text>
+            )}
+          </Box>
+        ) : (
+          <Loader minH={"65vh"} h={"65vh"} />
+        )}
       </VStack>
     </Container>
   );

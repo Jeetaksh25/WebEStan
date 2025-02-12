@@ -11,9 +11,18 @@ import {
 } from "@chakra-ui/react";
 import { useAuthStore } from "../store/useAuthStore.js";
 import { useColorModeValue } from "../components/ui/color-mode.jsx";
+import Loader from "../comps/Loader.jsx";
 
 const Profile = () => {
   const { authUser, getProfile } = useAuthStore();
+
+  useEffect(() => {
+    getProfile();
+  }, [getProfile]);
+
+  if(!getProfile){
+    <Loader minH={"100vh"} h={"100%"}/>
+  }
 
   return (
     <Container

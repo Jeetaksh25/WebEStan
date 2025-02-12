@@ -28,7 +28,7 @@ function App() {
 
   if (isCheckingAuth && !authUser) {
     return (
-      <Loader/>
+      <Loader minH={"100vh"} h={"100%"} />
     );
   }
 

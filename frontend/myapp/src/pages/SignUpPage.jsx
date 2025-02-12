@@ -21,30 +21,14 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { Link } from "react-router-dom";
+import Loader from "../comps/Loader.jsx";
 
 
 const SignUpPage = () => {
   useEffect(() => {
     if (isSigningUp && !authUser) {
       return (
-        <VStack gap={2} justifyContent={"center"} minH={"100vh"}>
-          <Spinner
-            size="xl"
-            thickness="10px"
-            speed="0.65s"
-            emptyColor="orange"
-            color="blue.500"
-            justifyContent={"center"}
-            css={{ "--spinner-track-color": "colors.gray.400" }}
-            borderWidth={"4px"}
-          />
-          <Text
-            fontSize={"2xl"}
-            color={useColorModeValue("gray.600", "gray.200")}
-          >
-            Loading...
-          </Text>
-        </VStack>
+        <Loader minH={"100vh"} h={"100%"}/>
       );
     }
   }, []);
