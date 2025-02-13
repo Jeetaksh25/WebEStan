@@ -5,6 +5,8 @@ import { BrowserRouter } from "react-router-dom";
 import { ColorModeProvider } from "./components/ui/color-mode";
 import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
 import "@chakra-ui/react";
+import { Buffer } from 'buffer';
+globalThis.Buffer = Buffer;
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

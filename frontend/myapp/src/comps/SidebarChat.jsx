@@ -9,6 +9,7 @@ import {
   Box,
   Heading,
   Button,
+  HStack,
 } from "@chakra-ui/react";
 import Loader from "./Loader";
 
@@ -75,7 +76,12 @@ const Users = () => {
                   my={2}
                   bgColor={useColorModeValue("rgb(254, 244, 226)", "gray.800")}
                 >
-                  {user.fullName}
+                  <HStack justifyContent={"space-between"} w={"100%"} h={"100%"}>
+                    <Text>{user.fullName}</Text>
+                    <Text>{onlineUsers.includes(user._id) ? "🟢" : "🔴"} </Text>
+
+                  </HStack>
+
                 </Button>
               ))
             ) : (

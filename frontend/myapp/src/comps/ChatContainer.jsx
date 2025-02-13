@@ -9,14 +9,15 @@ import MessageInput from "./MessageInput";
 import ChatBubble from "./ChatBubble";
 
 const ChatContainer = () => {
-  const { getMessages, messages, isMessagesLoading, selectedUser } =
+  const { getMessages, messages, isMessagesLoading, selectedUser, } =
     useChatStore();
 
   const messagesContainerRef = useRef(null);
 
   useEffect(() => {
     getMessages(selectedUser._id);
-  }, [selectedUser._id, getMessages]);
+
+  }, [selectedUser._id, getMessages,]);
 
   useEffect(() => {
     if (messagesContainerRef.current) {

@@ -1,3 +1,4 @@
+import { getReceiverSocketId,io } from "../lib/socket.js";
 import Chat from "../models/chat.model.js";
 import User from "../models/user.model.js";
 
@@ -48,8 +49,11 @@ export const sendMessage = async (req,res) => {
         });
 
         await newMessage.save();
-        
-        //todo: Socket.io
+
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if(receiverSocketId) {
+            io.to(receiverSocketId).emit("newMessage", newMessage);
+        }
 
         res.status(201).json(newMessage);
     }

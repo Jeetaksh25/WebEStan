@@ -20,7 +20,8 @@ import Chat from "./pages/Chat.jsx";
 import Loader from "./comps/Loader.jsx";
 
 function App() {
-  const { authUser, isCheckingAuth, checkAuth } = useAuthStore();
+  const { authUser, isCheckingAuth, checkAuth, onlineUsers } = useAuthStore();
+
 
   useEffect(() => {
     checkAuth();
