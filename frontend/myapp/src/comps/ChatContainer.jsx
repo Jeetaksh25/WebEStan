@@ -9,7 +9,7 @@ import MessageInput from "./MessageInput";
 import ChatBubble from "./ChatBubble";
 
 const ChatContainer = () => {
-  const { getMessages, messages, isMessagesLoading, selectedUser, } =
+  const { getMessages, messages, isMessagesLoading, selectedUser, listenMessages, unlistenMessages } =
     useChatStore();
 
   const messagesContainerRef = useRef(null);
@@ -17,7 +17,15 @@ const ChatContainer = () => {
   useEffect(() => {
     getMessages(selectedUser._id);
 
-  }, [selectedUser._id, getMessages,]);
+    const cleanup = listenMessages(selectedUser._id);
+
+    return()=>{
+      if(cleanup) cleanup();
+
+      unlistenMessages();
+    };
+
+  }, [selectedUser._id, getMessages, listenMessages, unlistenMessages]);
 
   useEffect(() => {
     if (messagesContainerRef.current) {

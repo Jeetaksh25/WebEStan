@@ -12,6 +12,7 @@ export const useChatStore = create((set,get) => ({
   isUsersLoading: false,
   isMessagesLoading: false,
   suggestions: [],
+  socket: null,
 
   getUsers: async () => {
     set({ isUsersLoading: true });
@@ -47,7 +48,6 @@ export const useChatStore = create((set,get) => ({
       toast.error("Failed to send message");
     } 
   },
-  //Todo: Optimize
   fetchSuggestions: async (input) =>{
     try {
       const res = await fetch(`https://api.datamuse.com/words?sp=${input}*`);
@@ -60,8 +60,37 @@ export const useChatStore = create((set,get) => ({
       set({ suggestions: [] });
     }
   },
+  listenMessages: (userId) => {
+    const { selectedUser } = get();
+    if (!selectedUser) return;
 
+    const socket = useAuthStore.getState().socket;
+    if (!socket) {
+      console.error("Socket is not initialized");
+      return;
+    }
 
+    const handleNewMessage = (newMessage) => {
+      const isMessageSentfromSelectedUser = newMessage.senderId === selectedUser._id;
+      if(!isMessageSentfromSelectedUser) return;
+      set((state) => ({
+        messages: [...state.messages, newMessage],
+      }));
+    };
+
+    socket.on("newMessage", handleNewMessage);
+
+    return () => {
+      socket.off("newMessage", handleNewMessage);
+    };
+  },
+
+  unlistenMessages: () => {
+    const socket = useAuthStore.getState().socket;
+    if (socket) {
+      socket.off("newMessage");
+    }
+  },
 
   setSelectedUser: (user) => set({ selectedUser:user }),
 }));
