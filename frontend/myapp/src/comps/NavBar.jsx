@@ -27,12 +27,16 @@ import {
   DrawerRoot,
 } from "@/components/ui/drawer";
 
+import { Tooltip } from "@/components/ui/tooltip"
+
+
 import { useColorModeValue, useColorMode } from "../components/ui/color-mode";
 
 const NavBar = () => {
   const { authUser, logout } = useAuthStore();
   const { colorMode, toggleColorMode } = useColorMode();
   const isMobile = useBreakpointValue({ base: true, md: false });
+
 
   const handleLogout = () => {
     logout();
@@ -135,7 +139,7 @@ const NavBar = () => {
                   <VStack gap={2}>
                     <Link to="/profile">
                       <Button bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")}>
-                        Profile
+                        {authUser.fullName.slice(0, 1).toUpperCase() + authUser.fullName.slice(authUser.fullName.length)}
                       </Button>
                     </Link>
                     <Button onClick={handleLogout} bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")}>
@@ -150,7 +154,7 @@ const NavBar = () => {
       ) : (
         <HStack justifyContent="space-between">
           <HStack gap={3}>{navItems}</HStack>
-          <HStack gap={2}>
+          <HStack gap={5}>
             <Button onClick={toggleColorMode}>
               {colorMode === "light" ? <MdDarkMode /> : <MdOutlineLightMode />}
             </Button>
@@ -170,9 +174,12 @@ const NavBar = () => {
             ) : (
               <>
                 <Link to="/profile">
-                  <Button bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")}>
-                    Profile
+                <Tooltip content="Profile">
+                <Button bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")} p={0} fontSize={"40px"} fontFamily={"sans-serif"} rounded={"full"} w={"40px"} h={"40px"}>
+                    {authUser.fullName.slice(0, 1).toUpperCase() + authUser.fullName.slice(authUser.fullName.length)}
                   </Button>
+                </Tooltip>
+
                 </Link>
                 <Button onClick={handleLogout} bg={useColorModeValue("rgb(254, 244, 226)", "gray.600")} color={useColorModeValue("black", "white")}>
                   Logout
