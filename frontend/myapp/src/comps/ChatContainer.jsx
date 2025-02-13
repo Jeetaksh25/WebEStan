@@ -1,18 +1,31 @@
 import { useChatStore } from "../store/useChatStore";
-import React, { useEffect } from "react";
+import { useAuthStore } from "../store/useAuthStore";
+import React, { useEffect, useRef } from "react";
 import { useColorModeValue } from "../components/ui/color-mode";
 import { Container, Text, VStack, Box, Heading, Input } from "@chakra-ui/react";
 import Loader from "./Loader";
 import ChatHeader from "./ChatHeader";
 import MessageInput from "./MessageInput";
+import ChatBubble from "./ChatBubble";
 
 const ChatContainer = () => {
   const { getMessages, messages, isMessagesLoading, selectedUser } =
     useChatStore();
 
+  const messagesContainerRef = useRef(null);
+
   useEffect(() => {
     getMessages(selectedUser._id);
   }, [selectedUser._id, getMessages]);
+
+  useEffect(() => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTo({
+        top: messagesContainerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [messages,isMessagesLoading]);
 
   return (
     <Container
@@ -26,20 +39,28 @@ const ChatContainer = () => {
       <ChatHeader />
       {!isMessagesLoading ? (
         <Box
+          ref={messagesContainerRef}
           w={"full"}
-          h={"auto"}
+          h={"60vh"}
           minH={"64vh"}
           alignItems={"center"}
           justifyContent={"center"}
           bg={useColorModeValue("rgb(255, 255, 255)", "gray.800")}
           overflow={"auto"}
           rounded={"lg"}
-        ></Box>
+          py={1}
+          px={4}
+          rowGap={3}
+        >
+          {messages.map((message) => (
+            <ChatBubble key={message._id} message={message} selectedUser={selectedUser}/>
+          ))}
+        </Box>
       ) : (
         <Loader minH={"65vh"} h={"65vh"} />
       )}
 
-      <MessageInput />
+      <MessageInput messagesContainerRef={messagesContainerRef}/>
     </Container>
   );
 };

@@ -25,7 +25,7 @@ const Users = () => {
   return (
     <Container
       h={"full"}
-      w={"50%"}
+      w={"45%"}
       flexDir={"column"}
       p={4}
       bg={useColorModeValue("rgb(254, 244, 226)", "gray.800")}
