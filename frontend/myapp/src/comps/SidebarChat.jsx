@@ -1,6 +1,6 @@
 import { useChatStore } from "../store/useChatStore";
 import { useAuthStore } from "../store/useAuthStore";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useColorModeValue } from "../components/ui/color-mode";
 import {
   Container,
@@ -12,16 +12,24 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import Loader from "./Loader";
+import { Switch } from "@/components/ui/switch"
 
 const Users = () => {
   const { getUsers, users, selectedUser, setSelectedUser, isUsersLoading } =
     useChatStore();
 
   const { onlineUsers } = useAuthStore();
+  const [showOnlineOnly, setShowOnlineOnly] = useState(false);
 
   useEffect(() => {
     getUsers();
   }, []);
+
+  const filteredUsers = showOnlineOnly ? users.filter(user => onlineUsers.includes(user._id)) : users;
+
+  const handleFilter = () => {
+    setShowOnlineOnly(!showOnlineOnly);
+  }
 
   return (
     <Container
@@ -46,6 +54,9 @@ const Users = () => {
           <Heading textAlign={"center"} fontSize={"2xl"}>
             Available Counselors
           </Heading>
+            <Switch defaultChecked={showOnlineOnly} onChange={handleFilter}>
+              Online Users Only
+            </Switch>
         </Box>
         {!isUsersLoading ? (
           <Box
@@ -59,7 +70,7 @@ const Users = () => {
             overflow={"auto"}
           >
             {Array.isArray(users) && users.length > 0 ? (
-              users.map((user) => (
+              filteredUsers.map((user) => (
                 <Button
                   key={user._id}
                   onClick={() => setSelectedUser(user)}
@@ -89,6 +100,7 @@ const Users = () => {
                 No counselors available
               </Text>
             )}
+            {filteredUsers.length === 0 && <Text>No counselors are available</Text>}
           </Box>
         ) : (
           <Loader minH={"65vh"} h={"65vh"} />
