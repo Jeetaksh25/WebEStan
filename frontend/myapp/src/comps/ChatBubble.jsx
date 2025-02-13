@@ -87,11 +87,11 @@ const ChatBubble = ({ message, selectedUser }) => {
         </VStack>
         {!isMyMessage ? (
           <Text>
-            {isMyMessage ? "You" : selectedUser?.fullName || "Unknown User"} •
+            • {isMyMessage ? "You" : selectedUser?.fullName || "Unknown User"} 
           </Text>
         ) : (
           <Text>
-            • {isMyMessage ? "You" : selectedUser?.fullName || "Unknown User"} 
+            {isMyMessage ? "You" : selectedUser?.fullName || "Unknown User"} •
           </Text>
         )}
       </VStack>
