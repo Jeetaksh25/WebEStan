@@ -13,12 +13,12 @@ const wordsDictionary = [
 
 const MessageInput = ({ messagesContainerRef }) => {
   const [text, setText] = useState("");
-  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const emojiPickerRef = useRef(null);
   const { sendMessages } = useChatStore();
-
+  
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
   const updateSuggestions = (input) => {
     if (!input) {
