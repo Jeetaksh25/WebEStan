@@ -16,6 +16,7 @@ import Test from "./pages/Test.jsx";
 import Connect from "./pages/Connect.jsx";
 import Footer from "./comps/Footer.jsx";
 import Chat from "./pages/Chat.jsx";
+import Chatbot from "./pages/ChatBot.jsx";
 
 import Loader from "./comps/Loader.jsx";
 
@@ -64,21 +65,7 @@ function App() {
           <Route
             path="/chatbot"
             element={authUser ?
-              (<Flex
-                direction="column"
-                justify="center"
-                align="center"
-                height="100vh"
-                px={4}
-              >
-                <iframe
-                  src="chatbot.htm"
-                  width="80%" 
-                  height="80%" 
-                  style={{ border: "none" }}
-                  title="Chatbot"
-                ></iframe>
-              </Flex>)
+              (<Chatbot/>)
               : <Navigate to="/login" />
             }
           />

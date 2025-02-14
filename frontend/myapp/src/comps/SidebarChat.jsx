@@ -54,7 +54,7 @@ const Users = () => {
           <Heading textAlign={"center"} fontSize={"2xl"}>
             Available Counselors
           </Heading>
-            <Switch defaultChecked={showOnlineOnly} onChange={handleFilter}>
+            <Switch defaultChecked={showOnlineOnly} onChange={handleFilter} mt={4} bg={useColorModeValue("rgb(254, 244, 226)", "gray.800")}>
               Online Users Only
             </Switch>
         </Box>

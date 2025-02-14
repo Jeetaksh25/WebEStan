@@ -91,7 +91,7 @@ const handleOutgoingMessage = (e) =>{
     chatBody.appendChild(incomingMessageDiv);
     generateBotResponse(incomingMessageDiv);
     },600)
-
+    
 }
 
 messageInput.addEventListener("keydown" , (e)=>{
